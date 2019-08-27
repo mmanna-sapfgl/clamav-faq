@@ -8,11 +8,19 @@ If you wish to build ClamAV from source using Visual Studio 2015, please head ov
 
 Important: Installing ClamAV using the Installer will require Administrator privileges.
 
-1. Download: <http://www.clamav.net/downloads/production/ClamAV-0.101.3.exe>
+The windows installer found for ClamAV indeed supports both 32/64-bit Windows Platform. Therefore, you can use this without concerns. In the guidelines below, `version` is referred to as the latest version. For reference, please visit ClamAV download section at [https://www.clamav.net/downloads](https://www.clamav.net/downloads) to know which version is suitable for your use.
+
+## Prerequisite ONLY IF a previous installation is present
+1. Take a backup copy of your current installation folder.
+2. Stop all services for freshclam and ClamAV daemon.
+3. Keep empty the contents of installation directory BUT PRESERVE the directory structure to have an empty location.
+
+## Installation steps
+1. Download from http://www.clamav.net/downloads/production/ClamAV-<latest-version-no>.exe
 2. Locate the file in your Downloads directory.
-3. Right-click on `ClamAV-0.101.3.exe` and select `Run as administrator`. You may receive a warning message along the lines of "Windows protected your PC".  Select `More info` and then select `Run anyway`.
+3. Right-click on the downloaded `ClamAV-<version>.exe` and select `Run as administrator`. You may receive a warning message along the lines of "Windows protected your PC".  Select `More info` and then select `Run anyway`.
 4. Select `I accept the agreement` and click `Next`.
-5. Click `Next` again. If you've removed a previous installation of ClamAV, you may receive the prompt "The folder ... already exists...". If you do, select `Yes`.
+5. Click `Next` again. If you've kept the previous installation directory, or overwriting it, an information message "The folder ... already exists..." may be shown. If this appears, select `Yes`.
 6. Click `Install`.
 7. Click `Finish`.
 8. Press the Windows-key and type `powershell` but _DO NOT_ press `Enter`. Right-click on `Windows PowerShell` at the top of the menu and select `Run as administrator`. Your computer may warn you `Do you want to allow this app to make changes to your device?`  Click `Yes`.
@@ -25,19 +33,22 @@ Important: Installing ClamAV using the Installer will require Administrator priv
   <pre>
       cd "c:\program files\clamav"
   </pre>
-
-Continue on to "First Time Set-Up" below...
+11. **IMPORTANT - FOR USERS WHO ARE UPGRADING** - you will need to copy your freshclam.conf and clamd.conf files from previous backup (please see above) into this new installation location. Additionally, you **MUST** run (only once) freshclam.exe once from Powershell/Windows Command Prompt (As Administrator) to ensure that Virus Definition Databases are initialized. Once all these are completed successfully, you can start your Windows Services (if you have ClamAV running as a Windows Service). 
 
 ---
 
 ## Install using the ClamAV Portable Install Package
 
-1. Download: <https://www.clamav.net/downloads/production/clamav-0.101.3-win-x64-portable.zip>
-2. Unzip it.
-3. Open the `clamav-0.101.3-win-x64-portable` directory.
-4. Hold down Shift and then right-click on the background in the current directory (but not on one of the files). Select `"Open PowerShell window here"`. If that option doesn't appear, try again.
+1. **PREREQUISITE - ONLY IF UPGRADING TO A NEW VERSION** 
+	a) Keep a backup of your old installation directory. Once the backup has been done, 
+	    please delete the contents of the directory where clamAV is currently present. 
+	b) Stop any Windows Services associated to ClamAV.
+2. Download: <https://www.clamav.net/downloads/production/clamav-0.101.4-win-x64-portable.zip>
+3. Unzip it. If you are Upgrading, unzip the contents into the emptied directory as per prerequisite on step 1.
+4. Open the `clamav-<version>-win-x64-portable` directory.
+5. Hold down Shift and then right-click on the background in the current directory (but not on one of the files). Select `"Open PowerShell window here"`. If that option doesn't appear, try again.
 
-Continue on to "First Time Set-Up"...
+Continue on to "First Time Set-Up". If you are upgrading, simply copy your freshclam.conf and clamd.conf from previous installation (backed up as per prerequisite step #1 above) into current location. Once that's done, please run "freshclam.exe" (only once) to initialize Virus Databases. After these are completed successfully, start your Windows Services for ClamAV.
 
 ---
 
